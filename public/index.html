@@ -1,33 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
 
+<head>
+    <title>Tweeter - Home Page</title>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <!-- External JS -->
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-
+    <script src="/scripts/composer-char-counter.js" type="text/javascript"></script>
+    <script src="https://use.fontawesome.com/b8994bec03.js"></script>
+    <!-- External JS -->
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+</head>
 
-  <body>
-
+<body>
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png" width="80px" height="80px">
-      <span class="header">Tweeter</span>
+        <img class="logo" src="/images/bird.png">
+        <span class="header">Tweeter</span>
     </nav>
-
     <!-- Page-specific (main) content here -->
     <main class="container">
+        <section class="new-tweet">
+            <h2>Compose Tweet</h2>
+            <form action="/tweets/" method="POST">
+                <textarea name="text" placeholder="What are you humming about?"></textarea>
+                <input type="submit" value="Tweet">
+                <span class="counter">140</span>
+            </form>
+        </section>
+        <section class="all-tweets">
+            <article class="tweet">
+                <header class="tweet-header">
+                    <img class="user-avatar" src="http://fillmurray.com/48/48" alt="Bill Murray">
+                    <a class="user-handle" href="#">@bill_murray</a>
+                    <h1>Bill Murray</h1>
+                </header>
+                <main class="tweet-content">
+                    <p>Life Aquatic With Steve Zissou was pretty cool. </p>
+                </main>
+                <footer class="tweet-footer">
+                    <a href="#">1 day ago</a>
+                    <div class="tweet-timestamp">
+                    </div>
+                    <div class="tweet-actions">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <i class="fa fa-retweet" aria-hidden="true"></i>
+                    </div>
+                </footer>
+            </article>
+        </section>
     </main>
+</body>
 
-  </body>
 </html>
