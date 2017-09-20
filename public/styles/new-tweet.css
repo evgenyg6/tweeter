@@ -10,6 +10,7 @@
     margin-bottom: 3%;
 }
 
+
 .new-tweet h2 {
 
     width: 94%;
@@ -34,7 +35,7 @@ input {
     margin-bottom: 0.5em;
 }
 
-.all-tweets {
+.tweet {
     overflow: hidden;
     border-radius: 7px;
     border-style: solid;
