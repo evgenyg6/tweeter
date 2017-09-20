@@ -1,9 +1,3 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- * driver code(temporary).Eventually will get this from the server.
- */
 $(document).ready(function() {
     /*    / Test /
         var data = [{
@@ -50,7 +44,7 @@ $(document).ready(function() {
             "created_at": 1461113796368
         }];*/
     ////////////////////////////////////////////////
-    function createTweetElement(tweetData) {
+    function createTweetElement(tweetData) { //creates the web structure, and appends each individual element to the "article" variable
         var $article = $("<article>").addClass("tweet")
 
         var $header = $("<header>").addClass("tweet-header")
@@ -77,9 +71,9 @@ $(document).ready(function() {
         return $combine;
     }
     ////////////////////////////////////////////////
-    function renderTweets(tweet) {
+    function renderTweets(tweet) { //for loop to ittirate and render each tweet
 
-        /*      tweet.forEach(function(eachTweet) {
+        /*      tweet.forEach(function(eachTweet) {  //order in reverse, no good
                   let $tweet = createTweetElement(eachTweet);
                   $('#tweets-container').append($tweet);
               });*/
@@ -88,41 +82,52 @@ $(document).ready(function() {
 
             let $tweet = createTweetElement(tweet[tweet.length - x - 1]);
 
-            $('#tweets-container').append($tweet);
+            $('#tweets-container').prepend($tweet);
 
         }
     }
-    //renderTweets(data);
     ////////////////////////////////////////////////
-    function loadTweets() {
+    function loadTweets() { //loads tweets using renderTweets function
         $.ajax({
-            type: 'GET',
+            method: 'GET',
             url: '/tweets',
             success: function(tweetObj) {
-                renderTweets(tweetObj);
+                var arr = tweetObj[tweetObj.length - 1];
+                var $newtweet = createTweetElement(arr);
+                $('#tweets-container').prepend($newtweet);
             }
         });
     }
-    var $button = $('#tweet-button')
-    $button.on('click', function() {})
+    var $button = $('#tweet-button'); //tweet button
+    $button.on('click', function() {
+        var x;
+        x = document.getElementById("tweet-input").value;
+        if (x == "") { //checks if input string is blank
+            alert("Please enter a non-empty tweet!");
+            return false;
+        }
+    });
 
     loadTweets();
     ////////////////////////////////////////////////
 
-    $("form").submit(function(event) {
+    $("form").submit(function(event) { //serialize input into string obj NOT JSON
 
         event.preventDefault();
         var tweetString = $("form").serialize();
         $.ajax({
-            type: 'POST',
+            method: 'POST',
             url: 'http://localhost:8080/tweets',
             data: tweetString,
             /*     dataType: 'json',*/
             encode: true,
             success: function() {
+                document.getElementById("tweet-input").value = "";
                 loadTweets();
             }
 
         })
     });
+    ////////////////////////////////////////////////
+
 });

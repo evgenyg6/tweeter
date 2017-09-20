@@ -51,6 +51,7 @@ input {
 .tweet h1 {
     display: inline-block;
     margin-left: -30%;
+    font-size: 1em;
 }
 
 .tweet-header {
