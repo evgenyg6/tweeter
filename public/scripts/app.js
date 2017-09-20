@@ -98,36 +98,39 @@ $(document).ready(function() {
             }
         });
     }
-    var $button = $('#tweet-button'); //tweet button
+    /*var $button = $('#tweet-button'); //tweet button
     $button.on('click', function() {
-        var x;
-        x = document.getElementById("tweet-input").value;
-        if (x == "") { //checks if input string is blank
-            alert("Please enter a non-empty tweet!");
-            return false;
+
+
+
         }
-    });
+    });*/
 
     loadTweets();
     ////////////////////////////////////////////////
 
     $("form").submit(function(event) { //serialize input into string obj NOT JSON
-
         event.preventDefault();
-        var tweetString = $("form").serialize();
-        $.ajax({
-            method: 'POST',
-            url: 'http://localhost:8080/tweets',
-            data: tweetString,
-            /*     dataType: 'json',*/
-            encode: true,
-            success: function() {
-                document.getElementById("tweet-input").value = "";
-                loadTweets();
-            }
+        var textArea = $("#tweet-input").val().length;
+        if (textArea === 0) { //checks if input string is blank
+            alert("Please enter a non-empty tweet!")
+        } else if (textArea > 140) {
+            alert("Your tweet is too long! Max 140");
+        } else {
+            var tweetString = $("form").serialize();
+            $.ajax({
+                method: 'POST',
+                url: 'http://localhost:8080/tweets',
+                data: tweetString,
+                /*     dataType: 'json',*/
+                encode: true,
+                success: function() {
+                    $("tweet-input").value = "";
+                    loadTweets();
+                }
 
-        })
-    });
+            })
+        };
+    })
     ////////////////////////////////////////////////
-
 });
