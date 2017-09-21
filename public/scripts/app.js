@@ -73,18 +73,18 @@ $(document).ready(function() {
     ////////////////////////////////////////////////
     function renderTweets(tweet) { //for loop to ittirate and render each tweet
 
-        /*      tweet.forEach(function(eachTweet) {  //order in reverse, no good
-                  let $tweet = createTweetElement(eachTweet);
-                  $('#tweets-container').append($tweet);
-              });*/
+        tweet.forEach(function(eachTweet) {
+            let $tweet = createTweetElement(eachTweet);
+            $('#tweets-container').append($tweet);
+        });
         ////////////////////////////////////////////////
-        for (let x in tweet) {
+        /*for (let x in tweet) {
 
             let $tweet = createTweetElement(tweet[tweet.length - x - 1]);
 
             $('#tweets-container').prepend($tweet);
 
-        }
+        }*/
     }
     ////////////////////////////////////////////////
     function loadTweets() { //loads tweets using renderTweets function
@@ -98,13 +98,7 @@ $(document).ready(function() {
             }
         });
     }
-    /*var $button = $('#tweet-button'); //tweet button
-    $button.on('click', function() {
 
-
-
-        }
-    });*/
 
     loadTweets();
     ////////////////////////////////////////////////
