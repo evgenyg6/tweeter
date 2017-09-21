@@ -4,6 +4,7 @@
         border: 1px solid #a8a8a8;
         width: 90%;
         margin: auto;
+        display: none;
     }
 
     .new-tweet h2 {
@@ -50,13 +51,16 @@
 
     .tweet h1 {
         display: inline-block;
-        margin-left: -30%;
+        margin: 0%;
         font-size: 1em;
+        float: left;
+        margin-left: 10px;
     }
 
     .tweet-header {
         padding: 0.75em;
         background-color: #eee;
+        height: 75px;
     }
 
     .user-handle {
@@ -91,7 +95,7 @@
         margin-left: -45%;
     }
 
-    .tweet:hover .tweet-actions {
+    +.tweet:hover .tweet-actions {
         opacity: 1;
     }
 
@@ -127,4 +131,10 @@
         background-image: -o-linear-gradient(top, #63c3ff, #3498db);
         background-image: linear-gradient(to bottom, #63c3ff, #3498db);
         text-decoration: none;
+    }
+
+    #tweet-button {
+
+        float: left;
+        margin-left: 10px;
     }
