@@ -27,21 +27,32 @@ $(document).ready(function() {
         return $combine;
     }
     ////////////////////////////////////////////////
-    function renderTweets(tweet) { //for loop to ittirate and render each tweet
+    function renderPreviousTweets(tweet) { //for loop to ittirate and render each tweet
 
-        tweet.forEach(function(eachTweet) {
+        /*tweet.forEach(function(eachTweet) {
             let $tweet = createTweetElement(eachTweet);
             $('#tweets-container').append($tweet);
-        });
+        });*/
         ////////////////////////////////////////////////
-        /*for (let x in tweet) {
+        for (let x in tweet) {
 
             let $tweet = createTweetElement(tweet[tweet.length - x - 1]);
+            $('#tweets-container').append($tweet);
 
-            $('#tweets-container').prepend($tweet);
-
-        }*/
+        }
     }
+    ////////////////////////////////////////////////
+    function loadPreviousTweets() { //loads previous  tweets using renderTweets function
+        $.ajax({
+            method: 'GET',
+            url: '/tweets',
+            success: function(tweetObj) {
+                renderPreviousTweets(tweetObj);
+            }
+        })
+    }
+
+    loadPreviousTweets();
     ////////////////////////////////////////////////
     function loadTweets() { //loads tweets using renderTweets function
         $.ajax({
@@ -49,12 +60,11 @@ $(document).ready(function() {
             url: '/tweets',
             success: function(tweetObj) {
                 var arr = tweetObj[tweetObj.length - 1];
-                var $newtweet = createTweetElement(arr);
-                $('#tweets-container').prepend($newtweet);
+                var newtweet = createTweetElement(arr);
+                $('#tweets-container').prepend(newtweet);
             }
         });
     }
-    loadTweets();
     ////////////////////////////////////////////////
     $("form").submit(function(event) { //serialize input into string obj NOT JSON
         event.preventDefault();
@@ -67,10 +77,9 @@ $(document).ready(function() {
             var tweetString = $("form").serialize();
             $.ajax({
                 method: 'POST',
-                url: 'http://localhost:8080/tweets',
+                url: '/tweets',
                 data: tweetString,
                 /*     dataType: 'json',*/
-                encode: true,
                 success: function() {
                     $('#counter').text("140"); // resets counter to 140 after submit
                     $("tweet-input").value = "";
