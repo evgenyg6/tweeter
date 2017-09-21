@@ -72,6 +72,7 @@ $(document).ready(function() {
                 /*     dataType: 'json',*/
                 encode: true,
                 success: function() {
+                    $('#counter').text("140"); // resets counter to 140 after submit
                     $("tweet-input").value = "";
                     loadTweets();
                 }
