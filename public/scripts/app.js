@@ -72,7 +72,7 @@ $(document).ready(function() {
                 data: tweetString,
                 success: function() {
                     $('#counter').text("140"); // resets counter to 140 after submit
-                    document.getElementById("tweet-input").value = "";
+                    $("#tweet-input").val("");
                     loadTweets();
                 }
             })
