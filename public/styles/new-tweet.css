@@ -122,7 +122,8 @@
         border: solid #1f628d 2px;
         text-decoration: none;
         float: right;
-        margin-top: 0.5%;
+        margin-top: 0.7%;
+        outline: none;
     }
 
     .btn:hover {
