@@ -83,7 +83,7 @@ $(document).ready(function() {
         };
     })
     ////////////////////////////////////////////////
-    $(".btn").click(function() {
+    $(".btn").click(function() { //compose button
         $(".container .new-tweet").slideToggle();
         $(".container textarea").select();
     });
