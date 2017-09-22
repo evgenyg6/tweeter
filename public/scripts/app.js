@@ -12,9 +12,9 @@ $(document).ready(function() {
             .append($("<p>").text(tweetData.content.text));
 
         var $icons = $("<div>").addClass("tweet-actions")
-            .append($("<i>").addClass("fa fa-heart"))
-            .append($("<i>").addClass("fa fa-flag"))
-            .append($("<i>").addClass("fa fa-retweet"));
+            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-heart")))
+            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-flag")))
+            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-retweet")));
 
         var $footer = $("<footer>").addClass("tweet-footer")
             .append($("<div>").addClass("tweet-timestamp"))
@@ -26,14 +26,14 @@ $(document).ready(function() {
         return $combine;
     }
     //for loop to ittirate and render each tweet in $combine variable
-    function renderPreviousTweets(tweet) { //for loop to ittirate and render each tweet in $combine variable
+    function renderPreviousTweets(tweet) {
         for (let x in tweet) {
 
             let $tweet = createTweetElement(tweet[tweet.length - x - 1]);
             $('#tweets-container').append($tweet);
         }
     }
-    //loads previous(already posted)  tweets using renderTweets function
+    //loads previous(already posted) tweets using renderTweets function
     function loadPreviousTweets() {
         $.ajax({
             method: 'GET',
@@ -72,14 +72,14 @@ $(document).ready(function() {
                 data: tweetString,
                 success: function() {
                     $('#counter').text("140"); // resets counter to 140 after submit
-                    $("#tweet-input").val() = ""; //clears input field after submission
+                    document.getElementById("tweet-input").value = "";
                     loadTweets();
                 }
             })
         };
     })
-    ////////////////////////////////////////////////
-    $(".btn").click(function() { //compose button
+    //compose button
+    $(".btn").click(function() {
         $(".container .new-tweet").slideToggle();
         $(".container textarea").select();
     });

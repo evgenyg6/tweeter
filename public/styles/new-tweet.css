@@ -87,14 +87,14 @@
     }
 
     .tweet-actions i {
-        padding-left: 0.3em;
-        padding-right: 0.3em;
+        padding-left: 0.6em;
+        padding-right: 0.6em;
         color: #4286f4;
     }
 
     .tweet-timestamp {
         display: inline-block;
-        margin-left: -45%;
+        margin-left: -35%;
     }
 
     .tweet:hover .tweet-actions {
