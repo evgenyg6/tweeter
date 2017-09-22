@@ -27,53 +27,47 @@ $(document).ready(function() {
         return $combine;
     }
     ////////////////////////////////////////////////
-    function renderPreviousTweets(tweet) { //for loop to ittirate and render each tweet
+    function renderPreviousTweets(tweet) { //for loop to ittirate and render each tweet in $combine variable
 
-        /*tweet.forEach(function(eachTweet) {
-            let $tweet = createTweetElement(eachTweet);
-            $('#tweets-container').append($tweet);
-        });*/
-        ////////////////////////////////////////////////
         for (let x in tweet) {
 
             let $tweet = createTweetElement(tweet[tweet.length - x - 1]);
             $('#tweets-container').append($tweet);
-
         }
     }
     ////////////////////////////////////////////////
-    function loadPreviousTweets() { //loads previous  tweets using renderTweets function
+    function loadPreviousTweets() { //loads previous(already posted)  tweets using renderTweets function
         $.ajax({
             method: 'GET',
             url: '/tweets',
             success: function(tweetObj) {
                 renderPreviousTweets(tweetObj);
             }
-        })
+        });
     }
 
-    loadPreviousTweets();
+    loadPreviousTweets(); //initial invocation to load+render all previous tweets
     ////////////////////////////////////////////////
-    function loadTweets() { //loads tweets using renderTweets function
+    function loadTweets() { //loads new tweets using renderTweets function
         $.ajax({
             method: 'GET',
             url: '/tweets',
             success: function(tweetObj) {
-                var arr = tweetObj[tweetObj.length - 1];
+                var arr = tweetObj[tweetObj.length - 1]; //grabs only the latest posted tweet
                 var newtweet = createTweetElement(arr);
                 $('#tweets-container').prepend(newtweet);
             }
         });
     }
     ////////////////////////////////////////////////
-    $("form").submit(function(event) { //serialize input into string obj NOT JSON
-        event.preventDefault();
+    $("form").submit(function(event) { //serialize input into string obj NOT JSON!
+        event.preventDefault(); //prevent default redirection to /tweets after submission
         var textArea = $("#tweet-input").val().length;
         if (textArea === 0) { //checks if input string is blank
             alert("Please enter a non-empty tweet!")
-        } else if (textArea > 140) {
+        } else if (textArea > 140) { //checks if input string is over 140 chars
             alert("Your tweet is too long! Max 140");
-        } else {
+        } else { //else submits tweet
             var tweetString = $("form").serialize();
             $.ajax({
                 method: 'POST',
@@ -90,10 +84,7 @@ $(document).ready(function() {
     })
     ////////////////////////////////////////////////
     $(".btn").click(function() {
-        /*$(".new-tweet").slideToggle(500, function() {*/
         $(".container .new-tweet").slideToggle();
         $(".container textarea").select();
-
-        /*   });*/
     });
 });
