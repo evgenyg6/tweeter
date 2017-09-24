@@ -105,6 +105,10 @@
         opacity: 1;
     }
 
+    .heart.red {
+        color: red;
+    }
+
     .btn {
         background: #34add9;
         background-image: -webkit-linear-gradient(top, #34add9, #2980b9);
