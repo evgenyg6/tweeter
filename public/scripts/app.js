@@ -24,7 +24,6 @@ $(document).ready(function() {
         var $combine = $article.append($header).append($main).append($footer);
 
         $combine.find(".heart").click(function() {
-            //$(this).css('color', 'red');
             $(this).toggleClass("red");
         });
 
