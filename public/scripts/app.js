@@ -12,9 +12,9 @@ $(document).ready(function() {
             .append($("<p>").text(tweetData.content.text));
 
         var $icons = $("<div>").addClass("tweet-actions")
-            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-heart")))
-            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-flag")))
-            .append($("<a>").attr("href", "http://www.google.ca").append($("<i>").addClass("fa fa-retweet")));
+            .append($("<i>").addClass("fa fa-heart heart"))
+            .append($("<i>").addClass("fa fa-flag flag"))
+            .append($("<i>").addClass("fa fa-retweet retweet"));
 
         var $footer = $("<footer>").addClass("tweet-footer")
             .append($("<div>").addClass("tweet-timestamp"))
@@ -22,6 +22,10 @@ $(document).ready(function() {
             .append($icons);
 
         var $combine = $article.append($header).append($main).append($footer);
+
+        $combine.find(".heart").click(function() {
+            $(this).css('color', 'red');
+        });
 
         return $combine;
     }
@@ -42,6 +46,9 @@ $(document).ready(function() {
                 renderPreviousTweets(tweetObj);
             }
         });
+        $(".clickable").click(function() {
+            alert("clicked");
+        });
     }
     loadPreviousTweets(); //initial invocation to load+render all previous tweets
     //loads new tweets using renderTweets function
@@ -53,6 +60,7 @@ $(document).ready(function() {
                 var arr = tweetObj[tweetObj.length - 1]; //grabs only the last posted tweet
                 var newtweet = createTweetElement(arr);
                 $('#tweets-container').prepend(newtweet);
+                $('#tweets-container .tweet:first-child').hide().delay(100).slideDown(600);
             }
         });
     }
